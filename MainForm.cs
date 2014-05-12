@@ -22,10 +22,8 @@ namespace ScreenBlocker
 	/// </summary>
 	public partial class MainForm : Form
 	{
-		//public WorkWithDb wwdbw;
 		AddHooks ad; 
-
-		//WorkWithDb wwdb;
+		
 		public MainForm()
 		{
 			//
@@ -48,8 +46,6 @@ namespace ScreenBlocker
 		public void HooksOn()
 		{
 			ad.SomeMethod();
-//			var inst = AddHooks.LoadLibrary("user32.dll").ToInt32();
-//			AddHooks.intLLKey = AddHooks.SetWindowsHookEx(AddHooks.WH_KEYBOARD_LL, ad.LowLevelKeyboardProc, inst, 0);
 		}
 		
 		private void Form1_Load(object sender, EventArgs e)

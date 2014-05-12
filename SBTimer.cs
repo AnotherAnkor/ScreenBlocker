@@ -18,7 +18,9 @@ using System.Net;
 using System.Threading;
 using System.Runtime.InteropServices;
 
-
+			//
+			// TODO: Сделать обработчик для обрыва сети.
+			//
 namespace ScreenBlocker
 {
 	/// <summary>
@@ -28,7 +30,6 @@ namespace ScreenBlocker
 	{
 		public string Login;
 		int myTime = 1;
-		//WorkWithDb wwdbw;
 		StrartStream ss;
 		
 		public SBTimer(string login)
@@ -38,14 +39,11 @@ namespace ScreenBlocker
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-			//WorkWithDb wwdb = new WorkWithDb();
-			//wwdbw = WorkWithDb.Instance;
 			myTime = WorkWithDb.Instance.TimeBalance(Login);
 			TimeToLabel();
 			timer1.Interval = 60000;
 			timer1.Enabled = true;
 			timer1.Start();
-			//AddHooks.UnhookWindowsHookEx(Program.MainForm.ad.intLLKey);
 			AddHooks.UnhookWindowsHookEx(AddHooks.intLLKey);
 			ss = new StrartStream();
 			ss.StreamStart();
@@ -71,10 +69,12 @@ namespace ScreenBlocker
 			timeShow.Text = myTime.ToString();
 		}
 		
+		AddHooks ad;
 		void StopWorkClick(object sender, EventArgs e)
 		{
 			Program.MainForm.Show();
-			Program.MainForm.HooksOn();
+			ad.SomeMethod();
+			//Program.MainForm.HooksOn();
 			ss.StopStream();
 			this.Close();
 		}
@@ -94,7 +94,7 @@ namespace ScreenBlocker
 				Program.MainForm.Show();
 				timer1.Stop();
 				this.Close();
-				Program.MainForm.HooksOn();
+				ad.SomeMethod();
 				ss.StopStream();
 			}
 		}	

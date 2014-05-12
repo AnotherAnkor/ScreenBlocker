@@ -45,7 +45,7 @@ namespace ScreenBlocker
 			// 
 			// stopWork
 			// 
-			this.stopWork.Location = new System.Drawing.Point(12, 122);
+			this.stopWork.Location = new System.Drawing.Point(12, 79);
 			this.stopWork.Name = "stopWork";
 			this.stopWork.Size = new System.Drawing.Size(106, 23);
 			this.stopWork.TabIndex = 1;
@@ -68,7 +68,7 @@ namespace ScreenBlocker
 			// timeShow
 			// 
 			this.timeShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.timeShow.Location = new System.Drawing.Point(12, 96);
+			this.timeShow.Location = new System.Drawing.Point(16, 37);
 			this.timeShow.Name = "timeShow";
 			this.timeShow.Size = new System.Drawing.Size(100, 23);
 			this.timeShow.TabIndex = 3;
@@ -77,7 +77,7 @@ namespace ScreenBlocker
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(128, 147);
+			this.ClientSize = new System.Drawing.Size(124, 111);
 			this.ControlBox = false;
 			this.Controls.Add(this.timeShow);
 			this.Controls.Add(this.userName);
@@ -86,7 +86,7 @@ namespace ScreenBlocker
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "SBTimer";
-			this.Opacity = 0.8;
+			this.Opacity = 0.8D;
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
