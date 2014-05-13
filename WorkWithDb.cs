@@ -9,7 +9,6 @@
 using System;
 using MySql.Data;
 using MySql.Data.MySqlClient;
-//using System.Data.Odbc; 
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
@@ -94,9 +93,6 @@ namespace ScreenBlocker
 				Program.MainForm.Close();
 			}
 
-			//
-			// TODO: Сделать обработку ошибок конвертирования.
-			//
 			else if ((login != "") && (password != ""))
 			{
 		        	MySqlConnection con = new MySqlConnection(connStr);
@@ -229,14 +225,14 @@ namespace ScreenBlocker
 		}
 	
 		/// <summary>Делает запись в БД о том, что работа была завершена в такой-то момент</summary>
-		public void StopWork(string login1)
+		public void StopWork(string login)
 		{
 			MySqlConnection con = new MySqlConnection(connStr);
 			try {
 		        con.Open();
 		        using (MySqlCommand cmd = new MySqlCommand("UPDATE time_used SET time_balance = @balance WHERE user_id = @id;", con))
 		        {
-					cmd.Parameters.AddWithValue("@id",login1);
+					cmd.Parameters.AddWithValue("@id",login);
 					cmd.Parameters.AddWithValue("@balance",balance);
 		        }
 		    }
@@ -254,7 +250,7 @@ namespace ScreenBlocker
 		/// но при этом записи об изменениях в остатке времени не будет. И чтобы после восстановления сети были получены точные результаты,
 		/// ежеминутно должен вызываться этот метод.
 		/// </summary>
-		public void BalanceMinus(string login1, int newBalance)
+		public void BalanceMinus(string login, int newBalance)
 		{
 			MySqlConnection con = new MySqlConnection(connStr);
 			try
@@ -262,7 +258,7 @@ namespace ScreenBlocker
 				string myQuery = (@"UPDATE time_used SET time_balance = @balance WHERE user_id = @id;");
 		        MySqlCommand cmd = new MySqlCommand(myQuery);
 		        cmd.Parameters.AddWithValue("@balance",newBalance.ToString());
-		   		cmd.Parameters.AddWithValue("@id",login1);
+		   		cmd.Parameters.AddWithValue("@id",login);
 		   		
 				cmd.Connection = con;
 				con.Open();
@@ -274,7 +270,8 @@ namespace ScreenBlocker
 				MainForm.ActiveForm.Activate();
 		    }
 			finally {
-		       con.Dispose();
+				con.Close();
+		     	con.Dispose();
 		    }
 		}
 		
@@ -304,14 +301,13 @@ namespace ScreenBlocker
 				MainForm.ActiveForm.Activate();
 		    }
 			finally {
-		       con.Dispose();
+				con.Close();
+		     	con.Dispose();
 		    }
 		}
 		
 		public void AgeUp(string login)
 		{
-			//this.login = login;
-			//balance--;
 			MySqlConnection con = new MySqlConnection(connStr);
 			try
 			{
@@ -327,17 +323,18 @@ namespace ScreenBlocker
 				MessageBox.Show("Не удалось связаться с сервером БД");
 		    }
 			finally {
-		       con.Dispose();
+				con.Close();
+		    	con.Dispose();
 		    }
 		}
 		
-		public string Name(string login1)
+		public string Name(string login)
 		{
 			MySqlConnection con = new MySqlConnection(connStr);
 		    try {
-		        string sql = (@"select name from users where id = (@login1);");
+		        string sql = (@"select name from users where id = (@id);");
 				MySqlCommand cmd = new MySqlCommand(sql);
-		        cmd.Parameters.AddWithValue("@id",login1);
+		        cmd.Parameters.AddWithValue("@id",login);
 		        cmd.Connection = con;
 		        con.Open();
 		        userName = cmd.ExecuteScalar().ToString();
