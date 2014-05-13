@@ -74,7 +74,6 @@ namespace ScreenBlocker
 		{
 			Program.MainForm.Show();
 			ad.SomeMethod();
-			//Program.MainForm.HooksOn();
 			ss.StopStream();
 			this.Close();
 		}
@@ -88,7 +87,7 @@ namespace ScreenBlocker
 				myTime = WorkWithDb.Instance.TimeBalance(Login)-1;
 				TimeToLabel();
 				WorkWithDb.Instance.BalanceMinus(Login, myTime);
-			}	
+			}
 			else
 			{
 				Program.MainForm.Show();

