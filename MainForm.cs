@@ -64,8 +64,6 @@ namespace ScreenBlocker
 	
 		void Button1Click(object sender, EventArgs e)
 		{
-			//wwdb = new WorkWithDb();
-			//wwdb = WorkWithDb.Instance;
 			try {
 				if (WorkWithDb.Instance.UserExist(login.Text.ToString(),password.Text.ToString()) == true)
 				{			
@@ -74,8 +72,6 @@ namespace ScreenBlocker
 						if (WorkWithDb.Instance.LastLoginNotToday(login.Text.ToString()) == false)
 						{
 							WorkWithDb.Instance.UpdateUserBalance(login.Text.ToString());
-							if (WorkWithDb.Instance.IsBurthday(login.Text.ToString()) == true)
-								WorkWithDb.Instance.AgeUp(login.Text.ToString());
 						}
 						
 						this.Hide();

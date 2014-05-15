@@ -285,7 +285,7 @@ namespace ScreenBlocker
 			{
 				string myQuery = (@"UPDATE time_used SET time_balance = 
  									(SELECT norm FROM restrictions WHERE id = 
-										(SELECT age FROM user_age WHERE user_id = @id)
+										(select year(curdate())-(select birthday from users where id = @id) as DiffDate)
 									)
 									WHERE user_id = @id;");
 		        MySqlCommand cmd = new MySqlCommand(myQuery);
@@ -305,29 +305,7 @@ namespace ScreenBlocker
 		     	con.Dispose();
 		    }
 		}
-		
-		public void AgeUp(string login)
-		{
-			MySqlConnection con = new MySqlConnection(connStr);
-			try
-			{
-				string myQuery = (@"UPDATE user_age SET age = ((select age where user_id = @id)+1) where user_id = @id;");
-		        MySqlCommand cmd = new MySqlCommand(myQuery);		       
-		   		cmd.Parameters.AddWithValue("@id",login);		   		
-				cmd.Connection = con;
-				con.Open();
-				cmd.ExecuteNonQuery();
-				cmd.Connection.Close();
-		    }
-		    catch (MySqlException) {
-				MessageBox.Show("Не удалось связаться с сервером БД");
-		    }
-			finally {
-				con.Close();
-		    	con.Dispose();
-		    }
-		}
-		
+
 		public string Name(string login)
 		{
 			MySqlConnection con = new MySqlConnection(connStr);
