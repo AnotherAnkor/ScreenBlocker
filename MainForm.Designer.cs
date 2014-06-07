@@ -61,7 +61,6 @@ namespace ScreenBlocker
 			this.login.Size = new System.Drawing.Size(220, 20);
 			this.login.TabIndex = 1;
 			this.login.Text = "Номер читательского билета";
-			this.login.TextChanged += new System.EventHandler(this.LoginTextChanged);
 			// 
 			// password
 			// 
@@ -108,7 +107,6 @@ namespace ScreenBlocker
 			this.Text = "ScreenBlocker";
 			this.TopMost = true;
 			this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}

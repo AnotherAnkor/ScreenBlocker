@@ -65,6 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddHooks.cs" />
+    <Compile Include="AsyncBaseDialog.cs" />
+    <Compile Include="LoadingCircle.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -77,6 +79,7 @@
       <DependentUpon>SBTimer.cs</DependentUpon>
     </Compile>
     <Compile Include="StrartStream.cs" />
+    <Compile Include="CheckItOut.cs" />
     <Compile Include="WorkWithDb.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

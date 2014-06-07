@@ -1,1 +1,1 @@
-﻿server=192.168.0.118;user=root;database=infograd;port=3306;password=password;
+﻿server=192.168.0.118;user=userName;database=dbname;port=3306;password=password;

@@ -14,16 +14,17 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Diagnostics;
+using MRG.Controls.UI;
 
 namespace ScreenBlocker
 {
 	/// <summary>
 	/// Description of MainForm.
 	/// </summary>
-	public partial class MainForm : Form
+	public partial class MainForm : AsyncBaseDialog
 	{
 		AddHooks ad; 
-		
+		public bool tmpFlag;
 		public MainForm()
 		{
 			//
@@ -61,52 +62,27 @@ namespace ScreenBlocker
             base.OnClosing(e);
             ad.EnableCTRLALTDEL();
         }
-	
+		public bool tmpBool;
 		void Button1Click(object sender, EventArgs e)
 		{
-			try {
-				if (WorkWithDb.Instance.UserExist(login.Text.ToString(),password.Text.ToString()) == true)
-				{			
-					if (WorkWithDb.Instance.IsBaned(login.Text.ToString()) == false)
-					{
-						if (WorkWithDb.Instance.LastLoginNotToday(login.Text.ToString()) == false)
-						{
-							WorkWithDb.Instance.UpdateUserBalance(login.Text.ToString());
-						}
-						
-						this.Hide();
-						SBTimer sbt = new SBTimer(login.Text.ToString());
-						sbt.Show();
-					}
-					else
-						MessageBox.Show("Ваш аккаунт заблокирован");
-				}
-				
-				else 
-				{
-				   	MessageBox.Show("Данные введены неверно. Попробуйте снова.");
-				}
-			}
-			//
-			// TODO: Сделать нормальную обработку ошибок.
-			//
-			catch
+			AsyncProcessDelegate d = delegate() {
+				CheckItOut tio = new CheckItOut(login.Text.ToString(),password.Text.ToString());
+			};
+			if (tmpBool)
 			{
-				//Program.MainForm.Show();
-				label1.Text = "Ошибка подключения";
+				this.Hide();
+				SBTimer sbt = new SBTimer(login.Text.ToString());
+		      	sbt.Show();
 			}
+		      RunAsyncOperation(d);
+					
 		}
 		
-		void LoginTextChanged(object sender, EventArgs e)
+	
+		public void ClearForm()
 		{
-			
-		}
-		
-		void Button2Click(object sender, EventArgs e)
-		{
-			this.Close();
-			ad.EnableCTRLALTDEL();
-			ad.ShowStartMenu();
+			login.Text = "";
+			password.Text = "";
 		}
 	}
 }

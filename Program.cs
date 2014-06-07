@@ -30,7 +30,7 @@ namespace ScreenBlocker
 		/// <summary>
 		/// Program entry point.
 		/// </summary>
-		[MTAThread]
+		[STAThread]
 		private static void Main(string[] args)
 		{
       		Application.EnableVisualStyles();
@@ -74,7 +74,7 @@ namespace ScreenBlocker
 				
 				MessageBox.Show("Батюшки! Пожалуйста, сообщите разработчикам об ошибке" 
 				          + " следующую информацию:\n\n" + ex.Message + ex.StackTrace, 
-				          "Фатальная ошибка программы", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+				          "Фатальная ошибка программы", MessageBoxButtons.OK);
 			}
 			/*
 			//HACK: здесь лучше использовать метод Exit() и заново запускать, банально потому, что иначе окна с ошибками

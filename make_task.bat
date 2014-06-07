@@ -1,0 +1,2 @@
+schtasks /create /SC ONLOGON /TN "ScreenBlocker" /RU Admin /RP pass  /TR "c:\Program Files (x86)\ScreenBlocker\screenblocker.exe"
+fsutil hardlink create "C:\Users\YOUR USER NAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"

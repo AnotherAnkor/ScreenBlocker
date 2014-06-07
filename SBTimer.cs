@@ -72,6 +72,7 @@ namespace ScreenBlocker
 		AddHooks ad;
 		void StopWorkClick(object sender, EventArgs e)
 		{
+			Program.MainForm.ClearForm();
 			Program.MainForm.Show();
 			ad.SomeMethod();
 			ss.StopStream();

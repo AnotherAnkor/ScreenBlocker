@@ -104,12 +104,7 @@ namespace ScreenBlocker
                MessageBox.Show(ex.ToString());
            }
         }
-		
-//		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-//        {
-//            e.Cancel = true;
-//            base.OnClosing(e);
-//        }
+
 		
 		public void ShowStartMenu()
         {
