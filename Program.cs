@@ -72,9 +72,9 @@ namespace ScreenBlocker
 			{
 				Exception ex = (Exception)e.ExceptionObject;
 				
-				MessageBox.Show("Батюшки! Пожалуйста, сообщите разработчикам об ошибке" 
-				          + " следующую информацию:\n\n" + ex.Message + ex.StackTrace, 
-				          "Фатальная ошибка программы", MessageBoxButtons.OK);
+//				MessageBox.Show("Батюшки! Пожалуйста, сообщите разработчикам об ошибке" 
+//				          + " следующую информацию:\n\n" + ex.Message + ex.StackTrace, 
+//				          "Фатальная ошибка программы", MessageBoxButtons.OK);
 			}
 			/*
 			//HACK: здесь лучше использовать метод Exit() и заново запускать, банально потому, что иначе окна с ошибками

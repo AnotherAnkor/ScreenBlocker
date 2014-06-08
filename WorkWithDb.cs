@@ -53,7 +53,6 @@ namespace ScreenBlocker
 			   }
 	   }
 		
-
 		private void ReadConnStr()
 		{
 			try

@@ -41,6 +41,7 @@ namespace ScreenBlocker
 			this.login = new System.Windows.Forms.TextBox();
 			this.password = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
+			this.bWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -105,11 +106,12 @@ namespace ScreenBlocker
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
 			this.Text = "ScreenBlocker";
-			this.TopMost = true;
 			this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.ComponentModel.BackgroundWorker bWorker1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox password;
 		private System.Windows.Forms.TextBox login;

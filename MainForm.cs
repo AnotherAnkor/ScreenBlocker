@@ -21,10 +21,9 @@ namespace ScreenBlocker
 	/// <summary>
 	/// Description of MainForm.
 	/// </summary>
-	public partial class MainForm : AsyncBaseDialog
+	public partial class MainForm : Form//AsyncBaseDialog
 	{
 		AddHooks ad; 
-		public bool tmpFlag;
 		public MainForm()
 		{
 			//
@@ -62,27 +61,33 @@ namespace ScreenBlocker
             base.OnClosing(e);
             ad.EnableCTRLALTDEL();
         }
-		public bool tmpBool;
+		
+		bool tmpBool = false;
+		
+		public bool TmpBool
+		{
+			set{tmpBool = value;}
+		}
+	
 		void Button1Click(object sender, EventArgs e)
 		{
-			AsyncProcessDelegate d = delegate() {
-				CheckItOut tio = new CheckItOut(login.Text.ToString(),password.Text.ToString());
-			};
+			MyBridge mb = new MyBridge();
+			mb.UserLogin = login.Text.ToString();
+			mb.UserPassword = password.Text.ToString();
+			mb.RunThat();
 			if (tmpBool)
 			{
 				this.Hide();
 				SBTimer sbt = new SBTimer(login.Text.ToString());
 		      	sbt.Show();
-			}
-		      RunAsyncOperation(d);
-					
+			}					
 		}
 		
-	
 		public void ClearForm()
 		{
 			login.Text = "";
 			password.Text = "";
+			tmpBool = false;
 		}
 	}
 }
