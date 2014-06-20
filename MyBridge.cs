@@ -40,30 +40,46 @@ namespace ScreenBlocker
 		      {
 			 	if (WorkWithDb.Instance.UserExist(userLogin,userPassword) == true)
 		      	{
+			 		WorkWithDb.Instance.CheckRecordInTimeUsed(userLogin);
 			 		if (WorkWithDb.Instance.IsBaned(userLogin) == false)
 		      		{
+			 			Program.MainForm.TmpBool = true;
 			 			if (WorkWithDb.Instance.LastLoginNotToday(userLogin) == false)
 		      			{
 			 				WorkWithDb.Instance.UpdateUserBalance(userLogin);
 		      			}
-		      			Program.MainForm.TmpBool = true;
+			 			if (WorkWithDb.Instance.TimeBalance(userLogin) > 0)
+		      				Program.MainForm.TmpBool = true;
+			 			else
+			 			{
+			 				Program.MainForm.SetLabelText("На сегодня Ваше время работы за компьютером закончилось. Ждём Вас завтра!");
+			 				Program.MainForm.TmpBool = false;
+			 				Program.MainForm.ClearForm();
+			 			}
 		      		}
 		      		else
 		      		{
-		      			MessageBox.Show("Ваш аккаунт заблокирован");
+		      			Program.MainForm.SetLabelText("Ваш аккаунт заблокирован");
 		      		}
 		      	}
+			 	else
+			 	{
+			 		Program.MainForm.SetLabelText("Пользователь не существует");
+			 	}
 			 }
 			  catch
 		      {
-		      	MessageBox.Show("Ошибка подключения");
+			  	Program.MainForm.SetLabelText("Ошибка подключения");
 		      }
+			  finally
+			  {
+			  
+			  }
 		}
 		
 		public void RunThat()
 		{
-			BackgroundLoading BL = new BackgroundLoading(CheckItOut);
-            BL.Start();
+           CheckItOut();
 		}
 	}
 }

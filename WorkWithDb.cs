@@ -80,6 +80,27 @@ namespace ScreenBlocker
 			}
 		}
 		
+		string GetMD5Hash(string word)
+		{
+			// создаем объект этого класса. Отмечу, что он создается не через new, а вызовом метода Create
+			MD5 md5Hasher = MD5.Create();
+						 
+			// Преобразуем входную строку в массив байт и вычисляем хэш
+			byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(word));
+			                                    //Unicode.GetBytes(word));
+						 
+			// Создаем новый Stringbuilder (Изменяемую строку) для набора байт
+			StringBuilder sBuilder = new StringBuilder();
+			
+			// Преобразуем каждый байт хэша в шестнадцатеричную строку
+			for (int i = 0; i < data.Length; i++)
+			{
+			    //указывает, что нужно преобразовать элемент в шестнадцатиричную строку длиной в два символа
+			    sBuilder.Append(data[i].ToString("x2")); 
+			}
+			return sBuilder.ToString();
+		}
+		
 		/// <summary>
 		/// UserExist - проверяет наличие записи о пользователе в БД
 		/// </summary>
@@ -91,34 +112,23 @@ namespace ScreenBlocker
 			bool bit = false;
 			if ((login == "Админ") && (password == pass))
 			{
+				AddHooks ad;
+				ad.EnableCTRLALTDEL();
+				ad.ShowStartMenu();
 				Program.MainForm.Close();
+				Application.Exit();
 			}
 
 			else if ((login != "") && (password != ""))
 			{
 		        	MySqlConnection con = new MySqlConnection(connStr);
-		        	try {
-				        // создаем объект этого класса. Отмечу, что он создается не через new, а вызовом метода Create
-						MD5 md5Hasher = MD5.Create();
-						 
-						// Преобразуем входную строку в массив байт и вычисляем хэш
-						byte[] data = md5Hasher.ComputeHash(Encoding.Unicode.GetBytes(password));
-						 
-						// Создаем новый Stringbuilder (Изменяемую строку) для набора байт
-						StringBuilder sBuilder = new StringBuilder();
-						 
-						// Преобразуем каждый байт хэша в шестнадцатеричную строку
-						for (int i = 0; i < data.Length; i++)
-						{
-						    //указывает, что нужно преобразовать элемент в шестнадцатиричную строку длиной в два символа
-						    sBuilder.Append(data[i].ToString("x2"));
-						}
-								        		
+		        	try 
+		        	{
 		        		con.Open();
 		        		string sql = (@"select case when exists (select id, pass from users where (id = @id) and pass like @password) then 1 else 0 end;");
 		        		MySqlCommand cmd = new MySqlCommand(sql, con);
 		        		cmd.Parameters.AddWithValue("@id",login);
-		        		cmd.Parameters.AddWithValue("@password",sBuilder.ToString());
+		        		cmd.Parameters.AddWithValue("@password",GetMD5Hash(GetMD5Hash(password)));
 		        		string strbit = cmd.ExecuteScalar().ToString();
 		        		if (strbit == "1")
 		        			bit = true;
@@ -261,6 +271,34 @@ namespace ScreenBlocker
 		        con.Close();
 		        con.Dispose();
 		    }
+		}
+		
+		public void CheckRecordInTimeUsed(string login)
+		{
+			MySqlConnection con = new MySqlConnection(connStr);
+			try {
+		        con.Open();
+		        using (MySqlCommand cmd = new MySqlCommand(@"INSERT INTO time_used (user_id,time_balance)
+					 SELECT * FROM 
+					(SELECT @id,
+					(SELECT norm FROM restrictions WHERE id = 
+					(select year(curdate())-(select birthday from users where id = @id) as DiffDate)
+														)
+					)
+					 AS tmp 
+					WHERE NOT EXISTS 
+					(SELECT user_id FROM time_used WHERE user_id = @id) LIMIT 1", con))
+		        {
+					cmd.Parameters.AddWithValue("@id",login);
+		        }
+		    }
+		    catch (MySqlException) {
+		        throw new MySqlException();
+		    }
+			finally {
+		        con.Close();
+		        con.Dispose();
+		    }			
 		}
 		
 		/// <summary>

@@ -43,6 +43,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="MySql.Data" />
     <Reference Include="MySql.Data" />
     <Reference Include="MySql.Data" />
@@ -65,9 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddHooks.cs" />
-    <Compile Include="AsyncBaseDialog.cs" />
     <Compile Include="BackgroundLoading.cs" />
-    <Compile Include="LoadingCircle.cs" />
     <Compile Include="LoadingForm.cs" />
     <Compile Include="LoadingForm.Designer.cs">
       <DependentUpon>LoadingForm.cs</DependentUpon>

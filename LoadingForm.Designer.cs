@@ -46,14 +46,14 @@ namespace ScreenBlocker
 			this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 									| System.Windows.Forms.AnchorStyles.Left) 
 									| System.Windows.Forms.AnchorStyles.Right)));
+			this.pictureBox1.Cursor = System.Windows.Forms.Cursors.No;
 			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-			this.pictureBox1.Location = new System.Drawing.Point(125, 116);
+			this.pictureBox1.Location = new System.Drawing.Point(77, 67);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(133, 133);
 			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
-			this.pictureBox1.UseWaitCursor = true;
 			// 
 			// LoadingForm
 			// 
@@ -66,6 +66,7 @@ namespace ScreenBlocker
 			this.Opacity = 0.8D;
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
+			this.TopMost = true;
 			this.UseWaitCursor = true;
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -57,6 +57,18 @@ namespace ScreenBlocker
 	        try {  throw new Exception("Resetting FPU control register, please ignore"); }
 	        catch { }
     	}
+		
+		protected override void OnFormClosing(FormClosingEventArgs e)
+		{
+		  switch (e.CloseReason)
+		  {
+		    case CloseReason.UserClosing:
+		      e.Cancel = true;
+		      break;
+		  }
+
+		  base.OnFormClosing(e);
+		}
 				
 		void NameToLabel(string str)
 		{
@@ -70,20 +82,26 @@ namespace ScreenBlocker
 		}
 		
 		AddHooks ad;
-		void StopWorkClick(object sender, EventArgs e)
+		
+		void StopWork()
 		{
 			Program.MainForm.ClearForm();
 			Program.MainForm.Show();
 			ad.SomeMethod();
 			ss.StopStream();
 			this.Close();
+			this.Dispose();
+		}
+		void StopWorkClick(object sender, EventArgs e)
+		{
+			StopWork();
 		}
 			
 		void Timer1Tick(object sender, EventArgs e)
 		{
 			if (WorkWithDb.Instance.IsBaned(Login) == true)
 				myTime = 0;
-			if (myTime != 0)
+			if (myTime > 0)
 			{
 				myTime = WorkWithDb.Instance.TimeBalance(Login)-1;
 				TimeToLabel();
@@ -93,6 +111,7 @@ namespace ScreenBlocker
 			{
 				Program.MainForm.Show();
 				timer1.Stop();
+				Program.MainForm.ClearForm();
 				this.Close();
 				ad.SomeMethod();
 				ss.StopStream();
