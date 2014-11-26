@@ -85,6 +85,9 @@
     </Compile>
     <Compile Include="StrartStream.cs" />
     <Compile Include="WorkWithDb.cs" />
+    <Content Include="ScreenBlocker.cd" />
+    <Content Include="ScreenBlocker.cd" />
+    <Content Include="ScreenBlocker.cd" />
     <EmbeddedResource Include="LoadingForm.resx">
       <DependentUpon>LoadingForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -105,24 +105,6 @@ namespace ScreenBlocker
            }
         }
 		
-		public void KillErrorMsg()
-	    {
-           RegistryKey regkey;
-           string keyValueInt = "2";
-           string subKey = @"Software\Microsoft\Windows\CurrentVersion\Policies\System";
-
-           try
-           {
-           	regkey = Registry.LocalMachine.CreateSubKey(keyValueInt);
-               regkey.SetValue("ErrorMode", keyValueInt);
-               regkey.Close();
-           }
-           catch (Exception ex)
-           {
-               MessageBox.Show(ex.ToString());
-           }
-        }
-		
 		public void ShowStartMenu()
         {
             int hwnd = FindWindow("Shell_TrayWnd", "");

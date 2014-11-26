@@ -142,7 +142,6 @@ namespace ScreenBlocker
 			InitializeComponent();
 			HooksOn();
 			ad.KillCtrlAltDelete();
-			ad.KillErrorMsg();
 			AllowAccessibilityShortcutKeys(false);
 		}
 		

@@ -58,6 +58,7 @@ namespace ScreenBlocker
 			try
 			{
 				string file = Path.GetFullPath(Directory.GetCurrentDirectory() + @"\connect.txt");
+				//string file = @"C:\Program Files (x86)\ScreenBlocker\connect.txt";
 				connStr = File.ReadAllText(file);
 			}
 			catch
@@ -72,6 +73,7 @@ namespace ScreenBlocker
 			try
 			{
 				string file = Path.GetFullPath(Directory.GetCurrentDirectory() + @"\pass.txt");
+				//string file = @"C:\Program Files (x86)\ScreenBlocker\pass.txt";
 				pass = File.ReadAllText(file);
 			}
 			catch
@@ -271,34 +273,6 @@ namespace ScreenBlocker
 		        con.Close();
 		        con.Dispose();
 		    }
-		}
-		
-		public void CheckRecordInTimeUsed(string login)
-		{
-			MySqlConnection con = new MySqlConnection(connStr);
-			try {
-		        con.Open();
-		        using (MySqlCommand cmd = new MySqlCommand(@"INSERT INTO time_used (user_id,time_balance)
-					 SELECT * FROM 
-					(SELECT @id,
-					(SELECT norm FROM restrictions WHERE id = 
-					(select year(curdate())-(select birthday from users where id = @id) as DiffDate)
-														)
-					)
-					 AS tmp 
-					WHERE NOT EXISTS 
-					(SELECT user_id FROM time_used WHERE user_id = @id) LIMIT 1", con))
-		        {
-					cmd.Parameters.AddWithValue("@id",login);
-		        }
-		    }
-		    catch (MySqlException) {
-		        throw new MySqlException();
-		    }
-			finally {
-		        con.Close();
-		        con.Dispose();
-		    }			
 		}
 		
 		/// <summary>

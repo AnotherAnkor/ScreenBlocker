@@ -40,10 +40,8 @@ namespace ScreenBlocker
 		      {
 			 	if (WorkWithDb.Instance.UserExist(userLogin,userPassword) == true)
 		      	{
-			 		WorkWithDb.Instance.CheckRecordInTimeUsed(userLogin);
 			 		if (WorkWithDb.Instance.IsBaned(userLogin) == false)
 		      		{
-			 			Program.MainForm.TmpBool = true;
 			 			if (WorkWithDb.Instance.LastLoginNotToday(userLogin) == false)
 		      			{
 			 				WorkWithDb.Instance.UpdateUserBalance(userLogin);
