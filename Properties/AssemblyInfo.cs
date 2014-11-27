@@ -3,6 +3,7 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 
 #endregion
 
@@ -12,10 +13,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ScreenBlocker")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Voronezh State Children Library")]
 [assembly: AssemblyProduct("ScreenBlocker")]
-[assembly: AssemblyCopyright("Copyright 2013")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright 2014")]
+[assembly: AssemblyTrademark("Voronezh State Children Library")]
 [assembly: AssemblyCulture("")]
 
 // This sets the default COM visibility of types in the assembly to invisible.
