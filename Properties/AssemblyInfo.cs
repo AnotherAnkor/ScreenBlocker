@@ -15,9 +15,9 @@ using System.Security.Permissions;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Voronezh State Children Library")]
 [assembly: AssemblyProduct("ScreenBlocker")]
-[assembly: AssemblyCopyright("Copyright 2014")]
+[assembly: AssemblyCopyright("Copyright 2016")]
 [assembly: AssemblyTrademark("Voronezh State Children Library")]
-[assembly: AssemblyCulture("")]
+//[assembly: AssemblyCulture("ru")]
 
 // This sets the default COM visibility of types in the assembly to invisible.
 // If you need to expose a type to COM, use [ComVisible(true)] on that type.

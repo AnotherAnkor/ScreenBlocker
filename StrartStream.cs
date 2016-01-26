@@ -23,7 +23,7 @@ namespace ScreenBlocker
 		public void StreamStart()
 		{
 			String appStartPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-			Process.Start(appStartPath + @"\ScreenStream.exe");
+			Process.Start(@"\ScreenStream.exe");
 		}
 		public void StopStream()
 		{
